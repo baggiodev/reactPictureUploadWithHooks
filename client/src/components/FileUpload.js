@@ -4,6 +4,8 @@ import axios from "axios";
 const FileUpload = () => {
   const [file, setFile] = useState("");
   const [fileName, setFileName] = useState("Choose file");
+  const [uploadFile, setUploadedFile] = useState({});
+
   const onChange = e => {
     setFile(e.target.files[0]);
     setFileName(e.target.files[0].name);
@@ -18,8 +20,14 @@ const FileUpload = () => {
       const res = await axios.post("/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" }
       });
+      const { fileName, filePath } = res.data;
+      setUploadedFile({ fileName, filePath });
     } catch (err) {
-      console.log("test");
+      if (err.response.status === 500) {
+        console.log("Internal server error");
+      } else {
+        console.log(err.response.data.msg);
+      }
     }
   };
 
