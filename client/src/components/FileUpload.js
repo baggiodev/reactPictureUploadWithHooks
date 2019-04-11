@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import Message from "./Message";
+import Progress from "./Progress";
 import axios from "axios";
 
 const FileUpload = () => {
@@ -47,6 +48,7 @@ const FileUpload = () => {
   return (
     <Fragment>
       {msg ? <Message msg={msg} /> : null}
+      {uploadPercent !== 0 ? <Progress percentage={uploadPercent} /> : null}
       <form onSubmit={onSubmit}>
         <div className="custom-file mb-4">
           <input
