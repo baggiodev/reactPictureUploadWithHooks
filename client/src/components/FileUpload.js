@@ -51,6 +51,18 @@ const FileUpload = () => {
           />
         </div>
       </form>
+      {uploadFile ? (
+        <div className="row mt-5">
+          <div className="col-md-6 m-auto">
+            <h3 className="text-center">{uploadFile.fileName}</h3>
+            <img
+              src={uploadFile.filePath}
+              alt={uploadFile.fileName}
+              style={{ width: "100%" }}
+            />
+          </div>
+        </div>
+      ) : null}
     </Fragment>
   );
 };
